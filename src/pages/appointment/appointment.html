@@ -9,8 +9,10 @@
 
 <ion-content padding>
 <ion-item>
-    <ion-label  (onChange)="filter()" >Date</ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY HH:mm"  [(ngModel)]="DateTime"> <ion-input placeholder='date'></ion-input></ion-datetime>
+    <ion-label   >Date</ion-label>
+    <ion-datetime (onChange)="filter()" displayFormat="MM/DD/YYYY"  [(ngModel)]="Date"></ion-datetime>
+    <ion-datetime (onChange)="filter()" displayFormat="HH:mm"  [(ngModel)]="Time"></ion-datetime>
+
 </ion-item>
 <ion-item>
     <ion-label>Title</ion-label>
