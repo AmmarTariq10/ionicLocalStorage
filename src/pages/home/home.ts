@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+
 
 
 @IonicPage()
@@ -11,7 +12,7 @@ export class HomePage {
   i = 0;
   data = []
   inputVal: string = "";
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modal: ModalController) {
     if(localStorage.getItem('masterkey')){
       this.i =  parseInt(localStorage.getItem('masterkey'))
       this.getData()
@@ -34,6 +35,13 @@ setData(inputValue){
     }
 }
 
+
+addAppointment(){
+  console.log('added')
+  let AppointmentPageModal = this.modal.create('AppointmentPage')
+  AppointmentPageModal.present()
+
+}
 
 emptyStorage(){
   localStorage.clear()

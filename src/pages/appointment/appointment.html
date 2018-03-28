@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Make a new Appointment</ion-title>
+    <ion-buttons end> <button ion-button (click)="dismiss()"> <ion-icon name="close"></ion-icon> </button> </ion-buttons>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content padding>
+<ion-item>
+    <ion-label  (onChange)="filter()" >Date</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY HH:mm"  [(ngModel)]="DateTime"> <ion-input placeholder='date'></ion-input></ion-datetime>
+</ion-item>
+<ion-item>
+    <ion-label>Title</ion-label>
+  <ion-input placeholder="Title"></ion-input>
+</ion-item>
+</ion-content>
