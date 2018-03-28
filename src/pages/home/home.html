@@ -22,9 +22,11 @@
         </ion-buttons>
 </ion-item>
 </ion-list>
-
-
-
-  <ion-label *ngFor='let m of data'> {{m}} </ion-label>
-
+<ion-scroll scrollY="true">
+<ion-list>
+<ion-item  *ngFor='let m of data'>
+<ion-label> {{m}} </ion-label>
+</ion-item>
+</ion-list>
+</ion-scroll>
 </ion-content>
