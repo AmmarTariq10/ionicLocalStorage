@@ -15,13 +15,12 @@
 </ion-item>
 
 <ion-item>
-  <ion-label> Date </ion-label>
-  <ion-da required [(ngModel)]='formDate' type='date' [min]=currentDateTime.cDate></ion-input>
+  <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [min]="currentDateTime.cDate" [max]="2025" [(ngModel)]="formDate">
+  </ion-datetime>
 </ion-item>
-
 <ion-item>
     <ion-label> Time </ion-label>
-    <ion-input required [(ngModel)]='formTime' type='time'></ion-input>
+    <ion-datetime required [(ngModel)]='formTime'  displayFormat="hh:mm A" pickerFormat="hh:mm A" [min]="currentDateTime.cDate"></ion-datetime>
 </ion-item>
 
 <ion-item>
