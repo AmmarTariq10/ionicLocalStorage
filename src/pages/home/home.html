@@ -14,14 +14,14 @@
 
 
     <ion-card *ngFor='let m of data'>
-    <ion-card-header>
-      {{m.title}}
-     </ion-card-header>
+        <ion-card-header>
+          {{m.title}}
+        </ion-card-header>
       
       <ion-card-content>
-       <ion-label stacked> {{m.date}} </ion-label>
-       <ion-label stacked> {{m.time}} </ion-label>
-       </ion-card-content>
+      <ion-label stacked> Date : {{m.date}} </ion-label>
+      <ion-label stacked> Time : {{m.time}} </ion-label>
+      </ion-card-content>
       
       </ion-card>
 

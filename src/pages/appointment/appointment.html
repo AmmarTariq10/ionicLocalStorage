@@ -6,25 +6,26 @@
   
 </ion-header>
 
-
 <ion-content padding>
 
-<ion-item>
-    <ion-label dark> Title </ion-label>
-    <ion-input required [(ngModel)]='formTitle' type='text'  placeholder='Type here...'></ion-input>
-</ion-item>
+    <ion-item>
+        <ion-label dark>Title </ion-label>
+        <ion-input required [(ngModel)]='formTitle' type='text'  placeholder='Type here...'></ion-input>
+    </ion-item>
 
-<ion-item>
-  <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" [min]="currentDateTime.cDate" [max]="2025" [(ngModel)]="formDate">
-  </ion-datetime>
-</ion-item>
-<ion-item>
-    <ion-label> Time </ion-label>
-    <ion-datetime required [(ngModel)]='formTime'  displayFormat="hh:mm A" pickerFormat="hh:mm A" [min]="currentDateTime.cDate"></ion-datetime>
-</ion-item>
+    <ion-item>
+        <ion-label dark> Date </ion-label>
+        <ion-datetime displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" [min]="minValDate" max='2030' [placeholder]='minValDate'>
+        </ion-datetime>
+    </ion-item>
 
-<ion-item>
-    <ion-buttons (click)='addAppointment()'> <button block ion-button> Add Appointment </button> </ion-buttons>
-</ion-item>
+    <ion-item>
+        <ion-label> Time </ion-label>
+        <ion-datetime required  displayFormat="HH:mm" pickerFormat="HH:mm" [placeholder]='minValTime' [min]="minValTime"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+        <ion-buttons (click)='addAppointment()'> <button block ion-button> Add Appointment </button> </ion-buttons>
+    </ion-item>
 
 </ion-content>
