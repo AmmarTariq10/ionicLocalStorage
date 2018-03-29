@@ -10,26 +10,31 @@
 
 <ion-content padding>
 
-<ion-list>
-    <ion-item>
-            <ion-label> Input Value </ion-label>
-            <ion-input placeholder=" Input value to store " [(ngModel)]='inputVal' clearInput=true></ion-input>
-            <input type="datetime-local" [(ngModel)]='inputVal2' >
-          </ion-item>
-
-    <ion-item>
-        <ion-buttons >
-        <button block ion-button (click)='setData(inputVal)' [disabled]='inputVal==""'> Save </button>
-        </ion-buttons>
-</ion-item>
-</ion-list>
 <ion-scroll scrollY="true">
-<ion-list>
-<ion-item  *ngFor='let m of data'>
-<ion-label> {{m}} </ion-label>
-</ion-item>
-</ion-list>
+
+
+    <ion-card *ngFor='let m of data'>
+    <ion-card-header>
+      {{m.title}}
+     </ion-card-header>
+      
+      <ion-card-content>
+       <ion-label stacked> {{m.date}} </ion-label>
+       <ion-label stacked> {{m.time}} </ion-label>
+       </ion-card-content>
+      
+      </ion-card>
+
+
+
+
+
+
+
+
 </ion-scroll>
+
+
 
 <ion-fab fab-md-box-shadow bottom right>
 <button ion-fab mini (click)='addAppointment()' ><ion-icon name="add"></ion-icon></button> 

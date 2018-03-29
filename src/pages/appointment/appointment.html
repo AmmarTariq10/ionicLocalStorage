@@ -8,14 +8,24 @@
 
 
 <ion-content padding>
-<ion-item>
-    <ion-label   >Date</ion-label>
-    <ion-datetime (onChange)="filter()" displayFormat="MM/DD/YYYY"  [(ngModel)]="Date"></ion-datetime>
-    <ion-datetime (onChange)="filter()" displayFormat="HH:mm"  [(ngModel)]="Time"></ion-datetime>
 
-</ion-item>
 <ion-item>
-    <ion-label>Title</ion-label>
-  <ion-input placeholder="Title"></ion-input>
+    <ion-label dark> Title </ion-label>
+    <ion-input required [(ngModel)]='formTitle' type='text'  placeholder='Type here...'></ion-input>
 </ion-item>
+
+<ion-item>
+  <ion-label> Date </ion-label>
+  <ion-da required [(ngModel)]='formDate' type='date' [min]=currentDateTime.cDate></ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-label> Time </ion-label>
+    <ion-input required [(ngModel)]='formTime' type='time'></ion-input>
+</ion-item>
+
+<ion-item>
+    <ion-buttons (click)='addAppointment()'> <button block ion-button> Add Appointment </button> </ion-buttons>
+</ion-item>
+
 </ion-content>
