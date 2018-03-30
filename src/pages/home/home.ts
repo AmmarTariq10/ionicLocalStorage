@@ -41,7 +41,8 @@ constructor(public navCtrl: NavController, public navParams: NavParams, public m
               // let index = parseInt(JSON.parse(item).key)
               this.data[j] = JSON.parse(item)
             }
-          console.log(this.data)
+
+          console.log('data array : ', this.data)
           this.data.forEach((element)=>{
             this.showData.push(element)
           })
