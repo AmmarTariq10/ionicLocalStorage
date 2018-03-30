@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { SortByDateTimePipe } from '../../pipes/sort-by-date-time/sort-by-date-time';
 import { IntDtPipe } from '../../pipes/int-dt/int-dt';
+import { KeyCreatorPipe } from '../../pipes/key-creator/key-creator';
 
 @IonicPage()
 @Component({
@@ -14,8 +15,9 @@ export class AppointmentPage {
 
 maxYear: string
 
-
+keyCreator = new KeyCreatorPipe()
 appointment={
+  'key':0,
   'title':'',
   'date':'',
   'time':'',
@@ -25,7 +27,9 @@ appointment={
 formDate=''
 formTime=''
 formTitle=''
+
 formDesp=''
+
 minValDate = ''
 minValTime = ''
 
@@ -93,9 +97,7 @@ dateChangeEhandler(date){
             }
 }
 
-
-
-  confirmation(){
+confirmation(){
 
       let alert = this.alert.create({
                 title: this.appointment.title,
@@ -125,14 +127,14 @@ dateChangeEhandler(date){
 }
 
               saveAppointment(){
-
+                let key = this.keyCreator.transform(this.formDate,this.formTime)
+                console.log('key genertated is ',key)
+                this.appointment.key = key
                 if(this.formDate != '' && this.formTime != '' && this.formTitle != ''){
-                  localStorage.setItem(this.appointment.title,JSON.stringify(this.appointment)) 
+                  localStorage.setItem(JSON.stringify(key),JSON.stringify(this.appointment)) 
                   this.dismiss()
                   }else{
                     console.log('null values are not accepted')
                   }
               }
-
-
-  }
+}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { ArrangePipe } from '../../pipes/arrange/arrange';
 
 
 
@@ -14,12 +15,13 @@ export class HomePage {
   data = []
   inputVal: string = "";
   message=''
+arrangedData=[]
+arrangeArray = new ArrangePipe()
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public modal: ModalController) {
-    if(localStorage.length == 0){
-        this.message = 'You currently have no appointments'
-    }else{
+    
       this.getData()
-    }
+  
 }
 
 
@@ -46,13 +48,15 @@ emptyStorage(){
 
 
 getData(){
-
   for (var j = localStorage.length-1; j>=0; j--) {
       let item = localStorage.getItem(localStorage.key(j));
-      this.data[j] = JSON.parse(item)
-      console.log(this.data[j])
+    let index = parseInt(JSON.parse(item).key)
+    console.log('key int :', index)
+      this.data[index] = JSON.parse(item)
+console.log(this.data)
+
     }
- console.log(this.data)
+ 
 }
 
 
