@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { ArrangePipe } from '../../pipes/arrange/arrange';
+
 
 
 
@@ -11,56 +11,40 @@ import { ArrangePipe } from '../../pipes/arrange/arrange';
   templateUrl: 'home.html',
 })
 export class HomePage {
-  i = 0;
-  data = []
-  inputVal: string = "";
-  message=''
-arrangedData=[]
-arrangeArray = new ArrangePipe()
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modal: ModalController) {
-    
-      this.getData()
   
-}
+  data = [];
+  showData = []
+  
+constructor(public navCtrl: NavController, public navParams: NavParams, public modal: ModalController) { this.getData();}
 
 
+        addAppointment(){
+          console.log('added')
+          let AppointmentPageModal = this.modal.create('AppointmentPage')
+          AppointmentPageModal.onDidDismiss(() => {
+            this.getData()
+            console.log('modal dismissed');
+          });
+          AppointmentPageModal.present()}
 
-addAppointment(){
-  console.log('added')
-  let AppointmentPageModal = this.modal.create('AppointmentPage')
-  AppointmentPageModal.onDidDismiss(() => {
-    this.getData()
-    console.log('modal dismissed');
-  });
-
-  AppointmentPageModal.present()
-  }
-
-
-
-emptyStorage(){
-  localStorage.clear()
-  this.data =[]
-  this.message = ""
-}
+        emptyStorage(){
+          localStorage.clear()
+          this.data =[]
+      
+        }
 
 
-
-getData(){
-  for (var j = localStorage.length-1; j>=0; j--) {
-      let item = localStorage.getItem(localStorage.key(j));
-    let index = parseInt(JSON.parse(item).key)
-    console.log('key int :', index)
-      this.data[index] = JSON.parse(item)
-console.log(this.data)
-
-    }
- 
-}
-
-
-
-
-
+        getData(){
+          this.showData = []
+          for (var j = localStorage.length-1; j>=0; j--) {
+          let item = localStorage.getItem(localStorage.key(j));
+              // let index = parseInt(JSON.parse(item).key)
+              this.data[j] = JSON.parse(item)
+            }
+          console.log(this.data)
+          this.data.forEach((element)=>{
+            this.showData.push(element)
+          })
+        console.log('arranged array',this.showData)
+        }
 }
