@@ -15,13 +15,13 @@
 
     <ion-item>
         <ion-label dark> Date </ion-label>
-        <ion-datetime displayFormat="DD-MM-YYYY" pickerFormat="DD-MM-YYYY" [min]="minValDate" max='2030' [placeholder]='minValDate'>
+        <ion-datetime (ionChange)='dateChangeEhandler(formDate)'  displayFormat="DD-MM-YYYY" [(ngModel)]='formDate' pickerFormat="DD-MM-YYYY" [min]="minValDate" [max]='maxYear' [placeholder]='minValDate'>
         </ion-datetime>
     </ion-item>
 
     <ion-item>
         <ion-label> Time </ion-label>
-        <ion-datetime required  displayFormat="HH:mm" pickerFormat="HH:mm" [placeholder]='minValTime' [min]="minValTime"></ion-datetime>
+        <ion-datetime required  displayFormat="HH:mm" [(ngModel)]='formTime' pickerFormat="HH:mm" [placeholder]='minValTime' [min]="minValTime"></ion-datetime>
     </ion-item>
 
     <ion-item>
