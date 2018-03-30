@@ -9,9 +9,14 @@
 <ion-content padding>
 
     <ion-item>
-        <ion-label dark>Title </ion-label>
-        <ion-input required [(ngModel)]='formTitle' type='text'  placeholder='Type here...'></ion-input>
+        <ion-label stacked> Topic </ion-label>
+        <ion-input required [(ngModel)]='formTitle' type='text' max='15'  placeholder='Appointment for...'></ion-input>
     </ion-item>
+
+    <ion-item>
+        <ion-label stacked dark>Details for appointment</ion-label>
+        <ion-textarea [(ngModel)]="formDesp" placeholder="Type Here..."></ion-textarea>
+      </ion-item>
 
     <ion-item>
         <ion-label dark> Date </ion-label>

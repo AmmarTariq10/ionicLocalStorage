@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController, AlertController } from 'ionic-angular';
-
-
+import { SortByDateTimePipe } from '../../pipes/sort-by-date-time/sort-by-date-time';
+import { IntDtPipe } from '../../pipes/int-dt/int-dt';
 
 @IonicPage()
 @Component({
@@ -9,168 +9,95 @@ import { IonicPage, NavParams, ViewController, AlertController } from 'ionic-ang
   templateUrl: 'appointment.html',
 })
 
+
 export class AppointmentPage {
-  maxYear: string
-i=0
+
+maxYear: string
+
+
 appointment={
   'title':'',
   'date':'',
-  'time':''
+  'time':'',
+  'desp':''
 }
 
 formDate=''
 formTime=''
 formTitle=''
+formDesp=''
+minValDate = ''
+minValTime = ''
+
 
 currentDateTime = {
   cTime:{
     hour:0,
-    minute:0
-  },
+    minute:0},
   cDate:{
       year:0,
       month:0,
-      day:0
-  }
+      day:0}
 }
 
+    currentDateTimeString = {
+    time: '',
+      date:''
+    }
 
-        constructor(public view: ViewController, public navParams: NavParams, public alert: AlertController) {
-          this.getCurrentDate()}
-
-        minValDate = ''
-        minValTime = ''
-        getCurrentDate(){
+format  = new SortByDateTimePipe();
+intDt = new IntDtPipe();
 
 
+constructor(public view: ViewController, public navParams: NavParams, public alert: AlertController) {this.getCurrentDate()}
+
+getCurrentDate(){
             let cd = new Date()
-            let tempD = ''
-            let tempM=''
-            let tempMin=''
-            let tempHour=''
-           
-            console.log('cd ',cd)
-
-            this.currentDateTime.cTime.hour = cd.getHours()
-            console.log('hour : ',this.currentDateTime.cTime.hour)
-            this.currentDateTime.cTime.minute = cd.getMinutes()
-            console.log('minute : ',this.currentDateTime.cTime.minute)
-            this.currentDateTime.cDate.year = cd.getFullYear()
-            console.log('Year : ',this.currentDateTime.cDate.year)
-            this.currentDateTime.cDate.month = cd.getMonth() 
-            console.log('month : ',this.currentDateTime.cDate.month)
-            this.currentDateTime.cDate.day = cd.getDate()
-            console.log('day : ',this.currentDateTime.cDate.day)        
-            console.log('Date Object',this.currentDateTime)
-
-      let formattedDate = this.currentDateTime.cDate.year + '-' + this.currentDateTime.cDate.month + '-' + this.currentDateTime.cDate.day
-                    console.log('formatted date ',formattedDate)
-
-            if(this.currentDateTime.cDate.month<10){
-              tempM = '0'+this.currentDateTime.cDate.month.toString()
-            }else{
-              tempM = this.currentDateTime.cDate.month.toString()
-            }
-
-            if(this.currentDateTime.cDate.day<10){
-              tempD = '0'+this.currentDateTime.cDate.day.toString()
-              console.log('asd')
-            }else{
-              tempD = this.currentDateTime.cDate.day.toString()
-              console.log('saf')
-            }
-
-
-      if(this.currentDateTime.cTime.minute<10){
-          tempMin = '0'+this.currentDateTime.cTime.minute.toString()
-        }else{
-         tempMin = this.currentDateTime.cTime.minute.toString()
-        }
-
-        if(this.currentDateTime.cTime.hour<10){
-          tempHour = '0'+this.currentDateTime.cTime.hour.toString()
-        }else{
-          tempHour = this.currentDateTime.cTime.hour.toString()
-        }
-
-
-
- 
-
-            this.minValDate = this.currentDateTime.cDate.year.toString()+'-'+tempM+'-'+tempD
-            this.minValTime = tempHour+':'+tempMin
+            this.currentDateTime = this.intDt.transform(cd)
+            console.log('cd to int',this.currentDateTime)
+            this.currentDateTimeString = this.format.transform(this.currentDateTime)
+            console.log('cd to string',this.currentDateTime)
+            this.minValDate = this.currentDateTimeString.date
+            this.minValTime = this.currentDateTimeString.time
             this.maxYear = (this.currentDateTime.cDate.year + 5).toString()
-            console.log('min time',this.minValTime)
-            console.log('max Year',this.maxYear)
-            console.log(this.minValDate)
-            console.log(this.minValTime)
-        }
+          }
 
 
-      dismiss(){
-              this.view.dismiss()
-      }
+dismiss(){this.view.dismiss()}
 
-          
-        addAppointment(){
+
+
+addAppointment(){
               this.appointment.title=this.formTitle
               this.appointment.date=this.formDate
               this.appointment.time=this.formTime
-              console.log('form Date',this.formDate)
-              console.log('form Time',this.formTime)
+              this.appointment.desp=this.formDesp
+
+   console.log('form Date',this.formDate)
+   console.log('form Time',this.formTime)
 
               this.confirmation()
-            }
+   }
 
 
-      dateChangeEhandler(date){
 
-        let tempM = ''
-        let tempD = ''
-
-         console.log('date change to ', date)    
-             if(this.currentDateTime.cDate.month<10){
-          tempM = '0'+this.currentDateTime.cDate.month.toString()
-        }else{
-          tempM = this.currentDateTime.cDate.month.toString()
-        }
-
-        if(this.currentDateTime.cDate.day<10){
-          tempD = '0'+this.currentDateTime.cDate.day.toString()
-        }else{
-          tempD = this.currentDateTime.cDate.day.toString()
-        }
-
-          let formattedDate = this.currentDateTime.cDate.year + '-' + tempM + '-' + tempD
-            console.log('formatted date : ',formattedDate)
-        let tempMin: string
-        let tempHour: string
-            if(date == formattedDate){
-              console.log('same')
-              if(this.currentDateTime.cTime.minute<10){
-                tempMin = '0'+this.currentDateTime.cTime.minute.toString()
-              }else{
-               tempMin = this.currentDateTime.cTime.minute.toString()
-              }
-      
-              if(this.currentDateTime.cTime.hour<10){
-                tempHour = '0'+this.currentDateTime.cTime.hour.toString()
-              }else{
-                tempHour = this.currentDateTime.cTime.hour.toString()
-                this.minValTime = tempHour+':'+tempMin
-              }
+dateChangeEhandler(date){
+              console.log('date change to ', date)    
+              this.getCurrentDate()
+            if(date == this.currentDateTimeString.date){
+              console.log('same date selected')
+              this.minValTime = this.currentDateTimeString.time  
             }else{
-              console.log('different')
+              console.log('different date selected')
               this.minValTime = '00:00'
             }
 }
 
 
 
+  confirmation(){
 
-      confirmation(){
-
-              let alert = this.alert.create({
+      let alert = this.alert.create({
                 title: this.appointment.title,
                 message: 'Are you sure want to add an appointment for ' + this.appointment.date + ' time : ' + this.appointment.time,
                 buttons: [
@@ -208,5 +135,4 @@ currentDateTime = {
               }
 
 
-
-      }
+  }
